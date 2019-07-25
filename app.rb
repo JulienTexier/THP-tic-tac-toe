@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-require 'io/console'
+require 'io/console' #il permet d'utiliser la fonction STDIN.getch qui permet de récupérer la valeur d'une touche sans avoir à appuyer sur entrée à chaque fois
 
 $:.unshift File.expand_path("../lib", __FILE__)
 
@@ -11,16 +11,9 @@ require 'app/board'
 require 'app/board_case'
 require 'views/show'
 require 'app/title'
+require 'app/round'
 
-Title.new
-cmd = ""
-while cmd != "q"
-  my_game = Game.new
-  while my_game.is_still_ongoing?
-    Show.new(my_game.board)
-    my_game.play
-  end
-  Show.new(my_game.board)
-  my_game.end
-  cmd = gets.chomp.downcase
-end
+
+my_game = Game.new
+my_game.start
+
